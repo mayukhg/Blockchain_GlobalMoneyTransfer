@@ -1,0 +1,95 @@
+/**
+ * supplychain model file
+ */
+
+namespace org.acme.model.test
+
+asset AmtTrans identified by vin {
+  o String vin
+  --> Member member_id
+}
+
+enum ListingState {
+  o ReadyForDeposit
+  o DepositedWithWU
+  o SentToAggregator
+  o ReceivedByAggregator
+  o SentToBank
+  o RecievedByBank
+  o SentToReceiver
+  o ReceivedByReceiver
+}
+
+asset TransMon identified by listingId {
+  o String listingId
+  o ListingState state
+  --> AmtTrans trans
+}
+
+abstract participant User identified by uid {
+  o String uid
+  o String name
+  --> Member member_id
+}
+
+participant Sender extends User {
+  o String vorder
+}
+
+participant Receiver extends User {
+  o String vorder
+}
+
+participant WU extends User {
+  
+}
+
+participant Aggregator extends User{
+
+}
+participant Bank extends User{
+  
+}
+participant Member extends User{
+  
+}
+
+transaction ReadyToDeposit{
+ --> TransMon trans
+ --> Sender member
+}
+
+transaction DepositWithWU{
+  --> TransMon trans
+  --> Sender member
+}
+
+transaction Orderw{
+  --> TransMon listing
+  --> WU member
+}
+
+
+transaction ReceivedByAggregator{
+  --> TransMon trans
+  --> Aggregator member
+}
+
+
+transaction SentToBank{
+ --> TransMon trans
+ --> Aggregator member
+}
+
+transaction ReceivedByBank{
+ --> TransMon trans
+ --> Bank member
+}
+
+transaction SentToReceiver{
+ --> TransMon trans
+ --> AmtTrans trans_id
+ --> Aggregator ware
+ --> Bank id
+}
+
