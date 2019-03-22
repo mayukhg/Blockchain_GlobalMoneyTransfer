@@ -66,15 +66,21 @@ function receive_aggr(ReceivedByAggregator){
   if(listing.state=='SentToAggregator'){
     listing.state='ReceivedByAggregator';
   }
-  else if(listing.state=='DELIVERED_W'){
-   throw window.alert('Delivered at the warehouse');
+  else if(listing.state=='ReadyForDeposit'){
+    	throw new window.alert('Amount yet to be deposited');
+    }
+  else if(listing.state=='SentToBank'){
+  	throw new window.alert('Amount already sent to bank');
   }
-  else {
-  	throw window.alert('Order is not for warehouse');
+  else if(listing.state=='ReceivedByAggregator'){
+  	throw new window.alert('Amount already received by aggregator');
   }
+  	else{
+    	throw new window.alert('Not a valid transaction');
+    }
   return getAssetRegistry('org.acme.model.supplychain.TransStatus')
         .then(function(transstatusListingRegistry) {
-            // save the vegetable listing
+            // save the Transaction Status listing
             return transstatusListingRegistry.update(listing);
         });
  
@@ -90,15 +96,21 @@ function sentto_bank(SentToBank){
   if(listing.state=='ReceivedByAggregator'){
     listing.state='SentToBank';
   }
-  else if(listing.state=='DELIVERED_C'){
-   throw window.alert('Delivered at the consumer');
+else if(listing.state=='ReadyForDeposit'){
+    	throw new window.alert('Amount yet to be deposited');
+    }
+  else if(listing.state=='ReceivedByAggregator'){
+  	throw new window.alert('Amount received by Aggregator');
   }
-  else {
-  	throw window.alert('Order is not for consumer');
+  else if(listing.state=='ReceivedByBank'){
+  	throw new window.alert('Amount already received by bank');
   }
+  	else{
+    	throw new window.alert('Not a valid transaction');
+    }
   return getAssetRegistry('org.acme.model.supplychain.TransStatus')
         .then(function(transstatusListingRegistry) {
-            // save the vegetable listing
+            // save the Transaction Status listing
             return transstatusListingRegistry.update(listing);
         });
 }
@@ -113,15 +125,21 @@ function receive_bank(ReceivedByBank){
   if(listing.state=='SentToBank'){
     listing.state='ReceivedByBank';
   }
-  else if(listing.state=='DELIVERED_C'){
-   throw window.alert('Delivered at the consumer');
+  else if(listing.state=='ReadyForDeposit'){
+    	throw new window.alert('Amount yet to be deposited');
+    }
+  else if(listing.state=='ReceivedByAggregator'){
+  	throw new window.alert('Amount received by Aggregator');
   }
-  else {
-  	throw window.alert('Order is not for consumer');
+  else if(listing.state=='SentToBank'){
+  	throw new window.alert('Amount already sent by bank');
   }
+  	else{
+    	throw new window.alert('Not a valid transaction');
+    }
   return getAssetRegistry('org.acme.model.supplychain.TransStatus')
         .then(function(transstatusListingRegistry) {
-            // save the vegetable listing
+            // save the Transaction Status listing
             return transstatusListingRegistry.update(listing);
         });
 }
@@ -136,15 +154,21 @@ function credit_recipient(CreditedToReceipient){
   if(listing.state=='ReceivedByBank'){
     listing.state='CreditedToReceipient';
   }
-  else if(listing.state=='DELIVERED_C'){
-   throw window.alert('Delivered at the consumer');
+ else if(listing.state=='ReadyForDeposit'){
+    	throw new window.alert('Amount yet to be deposited');
+    }
+  else if(listing.state=='ReceivedByAggregator'){
+  	throw new window.alert('Amount received by Aggregator');
   }
-  else {
-  	throw window.alert('Order is not for consumer');
+  else if(listing.state=='ReceivedByBank'){
+  	throw new window.alert('Amount already received by bank');
   }
+  	else{
+    	throw new window.alert('Not a valid transaction');
+    }
   return getAssetRegistry('org.acme.model.supplychain.TransStatus')
         .then(function(transstatusListingRegistry) {
-            // save the vegetable listing
+            // save the Transaction Status listing
             return transstatusListingRegistry.update(listing);
         });
 }
@@ -159,15 +183,21 @@ function conf_recipient(ConfirmedByReceipient){
   if(listing.state=='CreditedToReceipient'){
     listing.state='ConfirmedByReceipient';
   }
-  else if(listing.state=='DELIVERED_C'){
-   throw window.alert('Delivered at the consumer');
+else if(listing.state=='ReadyForDeposit'){
+    	throw new window.alert('Amount yet to be deposited');
+    }
+  else if(listing.state=='ReceivedByAggregator'){
+  	throw new window.alert('Amount received by Aggregator');
   }
-  else {
-  	throw window.alert('Order is not for consumer');
+  else if(listing.state=='ReceivedByBank'){
+  	throw new window.alert('Amount already received by bank');
   }
- return getAssetRegistry('org.acme.model.supplychain.TransStatus')
+  	else{
+    	throw new window.alert('Not a valid transaction');
+    }
+  return getAssetRegistry('org.acme.model.supplychain.TransStatus')
         .then(function(transstatusListingRegistry) {
-            // save the vegetable listing
+            // save the Transaction Status listing
             return transstatusListingRegistry.update(listing);
         });
 }
