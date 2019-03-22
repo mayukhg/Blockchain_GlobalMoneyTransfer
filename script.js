@@ -1,15 +1,15 @@
 /**
-      * @param {org.acme.model.supplychain.Orderw} makeOrderw
+      * @param {org.acme.model.supplychain.SentToAggregator} makeOrderw
        * @transaction 
  */
-function makeOrderw(Orderw) 
+function makeOrderw(SentToAggregator) 
 {
-    var listing = Orderw.listing;
+    var listing = SentToAggregator.listing;
     if (listing.state == 'HARVEST') {
         throw new window.alert('Vegetable not ready for delivery !!');
     }
-  	else if(listing.state=='ReadyForDeposit'){
-    	listing.state='DepositedWithWu';
+  	else if(listing.state=='DepositedWithWu'){
+    	listing.state='SentToAggregator';
     }
   	else if(listing.state=='IN_DELIVER_W'){
     	throw new window.alert('Arriving soon at warehouse !!');
@@ -80,17 +80,15 @@ function harvest(DepositedWithWu){
 }
 
 /**
-      * @param {org.acme.model.supplychain.deliver_w} Deliver_w
+      * @param {org.acme.model.supplychain.ReceivedByAggregator} Deliver_w
        * @transaction 
  */
 
-function Deliver_w(deliver_w){
-  var listing=deliver_w.listing;
-  var vege=deliver_w.vegetable_id;
-  var member=deliver_w.ware;
-  if(listing.state=='IN_DELIVER_W'){
-    vege.owner=member.uid;
-    listing.state='DELIVERED_W';
+function Deliver_w(ReceivedByAggregator){
+  var listing=ReceivedByAggregator.listing;
+
+  if(listing.state=='SentToAggregator'){
+    listing.state='ReceivedByAggregator';
   }
   else if(listing.state=='DELIVERED_W'){
    throw window.alert('Delivered at the warehouse');
@@ -109,17 +107,14 @@ function Deliver_w(deliver_w){
 }
 
 /**
-      * @param {org.acme.model.supplychain.deliver_c} Deliver_c
+      * @param {org.acme.model.supplychain.SentToBank} Deliver_c
        * @transaction 
  */
 
-function Deliver_c(deliver_c){
-  var listing=deliver_c.listing;
-  var vege=deliver_c.vegetable_id;
-  var member=deliver_c.ware;
-  if(listing.state=='IN_DELIVER_C'){
-    vege.owner=member.uid;
-    listing.state='DELIVERED_C';
+function Deliver_c(SentToBank){
+  var listing=SentToBank.listing;
+  if(listing.state=='ReceivedByAggregator'){
+    listing.state='SentToBank';
   }
   else if(listing.state=='DELIVERED_C'){
    throw window.alert('Delivered at the consumer');
@@ -136,3 +131,83 @@ function Deliver_c(deliver_c){
             return assetRegistry.update(vege);
         });
 }
+
+/**
+      * @param {org.acme.model.supplychain.ReceivedByBank} Deliver_c
+       * @transaction 
+ */
+
+function Deliver_c(ReceivedByBank){
+  var listing=ReceivedByBank.listing;
+  if(listing.state=='SentToBank'){
+    listing.state='ReceivedByBank';
+  }
+  else if(listing.state=='DELIVERED_C'){
+   throw window.alert('Delivered at the consumer');
+  }
+  else {
+  	throw window.alert('Order is not for consumer');
+  }
+  return getAssetRegistry('org.acme.model.supplychain.VegetableListing')
+        .then(function(vegetableListingRegistry) {
+            return vegetableListingRegistry.update(listing);
+        });
+  return getAssetRegistry('org.acme.model.supplychain.Vegetable')
+        .then(function(assetRegistry) {
+            return assetRegistry.update(vege);
+        });
+}
+
+/**
+      * @param {org.acme.model.supplychain.CreditedToReceipient} Deliver_c
+       * @transaction 
+ */
+
+function Deliver_c(CreditedToReceipient){
+  var listing=CreditedToReceipient.listing;
+  if(listing.state=='ReceivedByBank'){
+    listing.state='CreditedToReceipient';
+  }
+  else if(listing.state=='DELIVERED_C'){
+   throw window.alert('Delivered at the consumer');
+  }
+  else {
+  	throw window.alert('Order is not for consumer');
+  }
+  return getAssetRegistry('org.acme.model.supplychain.VegetableListing')
+        .then(function(vegetableListingRegistry) {
+            return vegetableListingRegistry.update(listing);
+        });
+  return getAssetRegistry('org.acme.model.supplychain.Vegetable')
+        .then(function(assetRegistry) {
+            return assetRegistry.update(vege);
+        });
+}
+
+/**
+      * @param {org.acme.model.supplychain.ConfirmedByReceipient} Deliver_c
+       * @transaction 
+ */
+
+function Deliver_c(ConfirmedByReceipient){
+  var listing=ConfirmedByReceipient.listing;
+  if(listing.state=='CreditedToReceipient'){
+    listing.state='ConfirmedByReceipient';
+  }
+  else if(listing.state=='DELIVERED_C'){
+   throw window.alert('Delivered at the consumer');
+  }
+  else {
+  	throw window.alert('Order is not for consumer');
+  }
+  return getAssetRegistry('org.acme.model.supplychain.VegetableListing')
+        .then(function(vegetableListingRegistry) {
+            return vegetableListingRegistry.update(listing);
+        });
+  return getAssetRegistry('org.acme.model.supplychain.Vegetable')
+        .then(function(assetRegistry) {
+            return assetRegistry.update(vege);
+        });
+}
+
+

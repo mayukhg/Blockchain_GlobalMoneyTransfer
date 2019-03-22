@@ -6,9 +6,25 @@ rule Member {
     action: ALLOW
 }
 
-rule Farmer {
+rule Sender {
     description: "Allow the farmer all access"
-    participant: "org.acme.model.supplychain.Farmer"
+    participant: "org.acme.model.supplychain.Money_Sender"
+    operation: ALL
+    resource: "org.acme.model.supplychain.*"
+    action: ALLOW
+}
+
+rule Bank {
+    description: "Allow the farmer all access"
+    participant: "org.acme.model.supplychain.Bank"
+    operation: ALL
+    resource: "org.acme.model.supplychain.*"
+    action: ALLOW
+}
+
+rule Receiver {
+    description: "Allow the farmer all access"
+    participant: "org.acme.model.supplychain.Money_Receiver"
     operation: ALL
     resource: "org.acme.model.supplychain.*"
     action: ALLOW
@@ -16,7 +32,7 @@ rule Farmer {
 
 rule Transporter {
     description: "Allow the transporter all access"
-    participant: "org.acme.model.supplychain.Transporter"
+    participant: "org.acme.model.supplychain.Aggregator"
     operation: ALL
     resource: "org.acme.model.supplychain.*"
     action: ALLOW
@@ -24,7 +40,7 @@ rule Transporter {
 
 rule Warehouse {
     description: "Allow the warehouse all access"
-    participant: "org.acme.model.supplychain.Warehouse"
+    participant: "org.acme.model.supplychain.WU_Ent"
     operation: ALL
     resource: "org.acme.model.supplychain.*"
     action: ALLOW

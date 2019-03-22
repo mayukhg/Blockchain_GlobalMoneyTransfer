@@ -12,10 +12,12 @@ asset Vegetable identified by vin {
 enum ListingState {
   o ReadyForDeposit
   o DepositedWithWu
-  o IN_DELIVER_W
-  o IN_DELIVER_C
-  o DELIVERED_W
-  o DELIVERED_C
+  o SentToAggregator
+  o ReceivedByAggregator
+  o SentToBank
+  o ReceivedByBank
+  o CreditedToReceipient
+  o ConfirmedByReceipient
 }
 
 asset VegetableListing identified by listingId {
@@ -35,14 +37,23 @@ participant Consumer extends User {
 }
 
 
-participant Warehouse extends User {
+participant WU_Ent extends User {
   
 }
 
-participant Farmer extends User{
+participant Bank extends User {
+  
+}
+
+participant Money_Sender extends User{
 
 }
-participant Transporter extends User{
+
+participant Money_Receiver extends User{
+
+}
+
+participant Aggregator extends User{
   
 }
 participant Member extends User{
@@ -54,26 +65,37 @@ transaction Orderc{
   --> Consumer member
 }
 
-transaction Orderw{
+transaction SentToBank{
   --> VegetableListing listing
-  --> Warehouse member
+  --> Aggregator id 
+}
+
+transaction SentToAggregator{
+  --> VegetableListing listing
+  --> WU_Ent member
 }
 
 transaction DepositedWithWu{
  --> VegetableListing listing
- --> Farmer member
+ --> Money_Sender member
 }
 
-transaction deliver_w{
+transaction ReceivedByAggregator{
  --> VegetableListing listing
- --> Vegetable vegetable_id
- --> Warehouse ware
- --> Transporter id
+ --> Aggregator id
 }
 
-transaction deliver_c{
+transaction ReceivedByBank{
  --> VegetableListing listing
- --> Vegetable vegetable_id
- --> Consumer ware
- --> Transporter id
+ --> Bank member
+}
+
+transaction CreditedToReceipient{
+ --> VegetableListing listing
+ --> Bank member
+}
+
+transaction ConfirmedByReceipient{
+ --> VegetableListing listing
+ --> Money_Receiver member
 }
