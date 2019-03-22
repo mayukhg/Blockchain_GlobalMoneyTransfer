@@ -8,8 +8,8 @@ function makeOrderw(Orderw)
     if (listing.state == 'HARVEST') {
         throw new window.alert('Vegetable not ready for delivery !!');
     }
-  	else if(listing.state=='HARVESTED'){
-    	listing.state='IN_DELIVER_W';
+  	else if(listing.state=='ReadyForDeposit'){
+    	listing.state='DepositedWithWu';
     }
   	else if(listing.state=='IN_DELIVER_W'){
     	throw new window.alert('Arriving soon at warehouse !!');
@@ -52,13 +52,13 @@ function makeOrderc(Orderc)
 }
 
 /**
-      * @param {org.acme.model.supplychain.Harvested} harvest
+      * @param {org.acme.model.supplychain.DepositedWithWu} harvest
        * @transaction 
  */
-function harvest(Harvested){
-	var listing=Harvested.listing;
-  	if(listing.state=='HARVEST'){
-    	listing.state='HARVESTED';
+function harvest(DepositedWithWu){
+	var listing=DepositedWithWu.listing;
+  	if(listing.state=='ReadyForDeposit'){
+    	listing.state='DepositedWithWu';
     }
   	else if(listing.state=='HARVESTED'){
     	throw new window.alert('Vegetable Already Harvested');
