@@ -1,4 +1,4 @@
-# Supply_Chain
+# Supply Chain monitoring using Blockchain
 
 > This is an interactive demo of the application of Blockchain for monitoring of Global Money Transfer. This demo aims to create a transaction tracker to determine which entity in the global money transfer supply chain currently has the amount being transacted. The various entities first need to confim the receipt of the amount and then need to send it to the downstream entity in the supply chain
 
