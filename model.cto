@@ -32,9 +32,15 @@ abstract participant User identified by uid {
   --> Member member_id
 }
 
+participant Money_Sender extends User{
 
+}
 
 participant WU_Ent extends User {
+  
+}
+
+participant Aggregator extends User{
   
 }
 
@@ -42,30 +48,13 @@ participant Bank extends User {
   
 }
 
-participant Money_Sender extends User{
-
-}
-
 participant Money_Receiver extends User{
 
 }
 
-participant Aggregator extends User{
-  
-}
+
 participant Member extends User{
   
-}
-
-
-transaction SentToBank{
-  --> TransStatus listing
-  --> Aggregator id 
-}
-
-transaction SentToAggregator{
-  --> TransStatus listing
-  --> WU_Ent member
 }
 
 transaction DepositedWithWu{
@@ -73,9 +62,20 @@ transaction DepositedWithWu{
  --> Money_Sender member
 }
 
+transaction SentToAggregator{
+  --> TransStatus listing
+  --> WU_Ent member
+}
+
+
 transaction ReceivedByAggregator{
  --> TransStatus listing
  --> Aggregator id
+}
+
+transaction SentToBank{
+  --> TransStatus listing
+  --> Aggregator id 
 }
 
 transaction ReceivedByBank{
