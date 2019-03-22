@@ -1,6 +1,6 @@
 
 /**
-      * @param {org.acme.model.supplychain.DepositedWithWu} harvest
+      * @param {org.acme.model.supplychain.DepositedWithWu} deposit_wu
        * @transaction 
  */
 function deposit_wu(DepositedWithWu){
@@ -20,15 +20,15 @@ function deposit_wu(DepositedWithWu){
   	else{
     	throw new window.alert('Out For Delivery');
     }
-  return getAssetRegistry('org.acme.model.supplychain.VegetableListing')
-        .then(function(vegetableListingRegistry) {
+  return getAssetRegistry('org.acme.model.supplychain.TransStatus')
+        .then(function(transstatusListingRegistry) {
             // save the vegetable listing
-            return vegetableListingRegistry.update(listing);
+            return transstatusListingRegistry.update(listing);
         });
 }
 
 /**
-      * @param {org.acme.model.supplychain.SentToAggregator} harvest
+      * @param {org.acme.model.supplychain.SentToAggregator} sentto_aggr
        * @transaction 
  */
 function sentto_aggr(SentToAggregator){
@@ -48,10 +48,10 @@ function sentto_aggr(SentToAggregator){
   	else{
     	throw new window.alert('Out For Delivery');
     }
-  return getAssetRegistry('org.acme.model.supplychain.VegetableListing')
-        .then(function(vegetableListingRegistry) {
+  return getAssetRegistry('org.acme.model.supplychain.TransStatus')
+        .then(function(transstatusListingRegistry) {
             // save the vegetable listing
-            return vegetableListingRegistry.update(listing);
+            return transstatusListingRegistry.update(listing);
         });
 }
 
@@ -72,14 +72,12 @@ function receive_aggr(ReceivedByAggregator){
   else {
   	throw window.alert('Order is not for warehouse');
   }
-  return getAssetRegistry('org.acme.model.supplychain.VegetableListing')
-        .then(function(vegetableListingRegistry) {
-            return vegetableListingRegistry.update(listing);
+  return getAssetRegistry('org.acme.model.supplychain.TransStatus')
+        .then(function(transstatusListingRegistry) {
+            // save the vegetable listing
+            return transstatusListingRegistry.update(listing);
         });
-  return getAssetRegistry('org.acme.model.supplychain.Vegetable')
-        .then(function(assetRegistry) {
-            return assetRegistry.update(vege);
-        });
+ 
 }
 
 /**
@@ -98,13 +96,10 @@ function sentto_bank(SentToBank){
   else {
   	throw window.alert('Order is not for consumer');
   }
-  return getAssetRegistry('org.acme.model.supplychain.VegetableListing')
-        .then(function(vegetableListingRegistry) {
-            return vegetableListingRegistry.update(listing);
-        });
-  return getAssetRegistry('org.acme.model.supplychain.Vegetable')
-        .then(function(assetRegistry) {
-            return assetRegistry.update(vege);
+  return getAssetRegistry('org.acme.model.supplychain.TransStatus')
+        .then(function(transstatusListingRegistry) {
+            // save the vegetable listing
+            return transstatusListingRegistry.update(listing);
         });
 }
 
@@ -124,13 +119,10 @@ function receive_bank(ReceivedByBank){
   else {
   	throw window.alert('Order is not for consumer');
   }
-  return getAssetRegistry('org.acme.model.supplychain.VegetableListing')
-        .then(function(vegetableListingRegistry) {
-            return vegetableListingRegistry.update(listing);
-        });
-  return getAssetRegistry('org.acme.model.supplychain.Vegetable')
-        .then(function(assetRegistry) {
-            return assetRegistry.update(vege);
+  return getAssetRegistry('org.acme.model.supplychain.TransStatus')
+        .then(function(transstatusListingRegistry) {
+            // save the vegetable listing
+            return transstatusListingRegistry.update(listing);
         });
 }
 
@@ -150,13 +142,10 @@ function credit_recipient(CreditedToReceipient){
   else {
   	throw window.alert('Order is not for consumer');
   }
-  return getAssetRegistry('org.acme.model.supplychain.VegetableListing')
-        .then(function(vegetableListingRegistry) {
-            return vegetableListingRegistry.update(listing);
-        });
-  return getAssetRegistry('org.acme.model.supplychain.Vegetable')
-        .then(function(assetRegistry) {
-            return assetRegistry.update(vege);
+  return getAssetRegistry('org.acme.model.supplychain.TransStatus')
+        .then(function(transstatusListingRegistry) {
+            // save the vegetable listing
+            return transstatusListingRegistry.update(listing);
         });
 }
 
@@ -176,13 +165,10 @@ function conf_recipient(ConfirmedByReceipient){
   else {
   	throw window.alert('Order is not for consumer');
   }
-  return getAssetRegistry('org.acme.model.supplychain.VegetableListing')
-        .then(function(vegetableListingRegistry) {
-            return vegetableListingRegistry.update(listing);
-        });
-  return getAssetRegistry('org.acme.model.supplychain.Vegetable')
-        .then(function(assetRegistry) {
-            return assetRegistry.update(vege);
+ return getAssetRegistry('org.acme.model.supplychain.TransStatus')
+        .then(function(transstatusListingRegistry) {
+            // save the vegetable listing
+            return transstatusListingRegistry.update(listing);
         });
 }
 
