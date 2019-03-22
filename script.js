@@ -56,7 +56,7 @@ function sentto_aggr(SentToAggregator){
 }
 
 /**
-      * @param {org.acme.model.supplychain.ReceivedByAggregator} Deliver_w
+      * @param {org.acme.model.supplychain.ReceivedByAggregator} receive_aggr
        * @transaction 
  */
 
@@ -81,7 +81,7 @@ function receive_aggr(ReceivedByAggregator){
 }
 
 /**
-      * @param {org.acme.model.supplychain.SentToBank} Deliver_c
+      * @param {org.acme.model.supplychain.SentToBank} sentto_bank
        * @transaction 
  */
 
@@ -104,7 +104,7 @@ function sentto_bank(SentToBank){
 }
 
 /**
-      * @param {org.acme.model.supplychain.ReceivedByBank} Deliver_c
+      * @param {org.acme.model.supplychain.ReceivedByBank} receive_bank
        * @transaction 
  */
 
@@ -127,7 +127,7 @@ function receive_bank(ReceivedByBank){
 }
 
 /**
-      * @param {org.acme.model.supplychain.CreditedToReceipient} Deliver_c
+      * @param {org.acme.model.supplychain.CreditedToReceipient} credit_recipient
        * @transaction 
  */
 
@@ -150,7 +150,7 @@ function credit_recipient(CreditedToReceipient){
 }
 
 /**
-      * @param {org.acme.model.supplychain.ConfirmedByReceipient} Deliver_c
+      * @param {org.acme.model.supplychain.ConfirmedByReceipient} conf_recipient
        * @transaction 
  */
 
