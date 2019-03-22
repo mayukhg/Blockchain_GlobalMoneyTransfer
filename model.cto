@@ -4,7 +4,7 @@
 
 namespace org.acme.model.supplychain
 
-asset Vegetable identified by vin {
+asset Trans identified by vin {
   o String vin
   --> Member member_id
 }
@@ -20,10 +20,10 @@ enum ListingState {
   o ConfirmedByReceipient
 }
 
-asset VegetableListing identified by listingId {
+asset TransStatus identified by listingId {
   o String listingId
   o ListingState state
-  --> Vegetable vege
+  --> Trans trans
 }
 
 abstract participant User identified by uid {
@@ -32,9 +32,6 @@ abstract participant User identified by uid {
   --> Member member_id
 }
 
-participant Consumer extends User {
-  o String vorder
-}
 
 
 participant WU_Ent extends User {
@@ -60,42 +57,38 @@ participant Member extends User{
   
 }
 
-transaction Orderc{
-  --> VegetableListing listing
-  --> Consumer member
-}
 
 transaction SentToBank{
-  --> VegetableListing listing
+  --> TransStatus listing
   --> Aggregator id 
 }
 
 transaction SentToAggregator{
-  --> VegetableListing listing
+  --> TransStatus listing
   --> WU_Ent member
 }
 
 transaction DepositedWithWu{
- --> VegetableListing listing
+ --> TransStatus listing
  --> Money_Sender member
 }
 
 transaction ReceivedByAggregator{
- --> VegetableListing listing
+ --> TransStatus listing
  --> Aggregator id
 }
 
 transaction ReceivedByBank{
- --> VegetableListing listing
+ --> TransStatus listing
  --> Bank member
 }
 
 transaction CreditedToReceipient{
- --> VegetableListing listing
+ --> TransStatus listing
  --> Bank member
 }
 
 transaction ConfirmedByReceipient{
- --> VegetableListing listing
+ --> TransStatus listing
  --> Money_Receiver member
 }

@@ -30,44 +30,21 @@ rule Receiver {
     action: ALLOW
 }
 
-rule Transporter {
-    description: "Allow the transporter all access"
-    participant: "org.acme.model.supplychain.Aggregator"
-    operation: ALL
-    resource: "org.acme.model.supplychain.*"
-    action: ALLOW
-}
 
-rule Warehouse {
-    description: "Allow the warehouse all access"
-    participant: "org.acme.model.supplychain.WU_Ent"
-    operation: ALL
-    resource: "org.acme.model.supplychain.*"
-    action: ALLOW
-}
-
-rule Consumer {
-    description: "Allow the consumer all access"
-    participant: "org.acme.model.supplychain.Consumer"
-    operation: ALL
-    resource: "org.acme.model.supplychain.*"
-    action: ALLOW
-}
-
-rule VegetableOwner {
+rule TransOwner {
     description: "Allow the owner of a vegetable total access"
     participant(m): "org.acme.model.supplychain.User"
     operation: ALL
-    resource(v): "org.acme.model.supplychain.Vegetable"
+    resource(v): "org.acme.model.supplychain.Trans"
     condition: (v.owner.getIdentifier() == m.getIdentifier())
     action: ALLOW
 }
 
-rule VegetableListingOwner {
+rule TransStatusOwner {
     description: "Allow the owner of a vegetable total access to their vegetable listing"
     participant(m): "org.acme.model.supplychain.User"
     operation: ALL
-    resource(v): "org.acme.model.supplychain.VegetableListing"
+    resource(v): "org.acme.model.supplychain.TransStatus"
     condition: (v.vehicle.owner.getIdentifier() == m.getIdentifier())
     action: ALLOW
 }
