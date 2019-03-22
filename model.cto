@@ -52,7 +52,6 @@ participant Money_Receiver extends User{
 
 }
 
-
 participant Member extends User{
   
 }
@@ -66,7 +65,6 @@ transaction SentToAggregator{
   --> TransStatus listing
   --> WU_Ent member
 }
-
 
 transaction ReceivedByAggregator{
  --> TransStatus listing
