@@ -12,6 +12,10 @@ The business network defines:
 
 **Transactions:** `DepositedWithEntity` `SentToAggregator` `ReceivedByAggregator` `SentToBank` `ReceivedByBank``CreditedToRecipient` `ConfirmedByRecipient`
 
+This is the diagrammatic representation of the application flow
+https://www.dropbox.com/s/ywsvzkunk794bed/GlobalMoneyTransfer.jpeg?dl=0
+
+
 Here is a summary of the various transactions which are part of the flow
 
 (1) DepositWithEntity - The Money Sender deposits the amount with the Global Money Transfer Vender
