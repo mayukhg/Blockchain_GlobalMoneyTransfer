@@ -12,12 +12,14 @@ The business network defines:
 
 **Transactions:** `DepositedWithEntity` `SentToAggregator` `ReceivedByAggregator` `SentToBank` `ReceivedByBank``CreditedToRecipient` `ConfirmedByRecipient`
 
-DepositWithEntity - The Money Sender deposits the amount with the Global Money Transfer Vender
-SentToAggregator - The Vendor sends amount to Aggregator
-ReceivedByAggregator - The Aggregator confirms the receipt of the amount
-SentToBank - The Aggregator sends amount to the Recipient's Bank
-ReceivedByBank - The Recipient's Bank confirms the receipt of the amount
-CreditedToRecipient - The amount is credited to the Recipient
-ConfirmedByRecipient - The amount receipt is confirmed by the Recipient
+Here is a summary of the various transactions which are part of the flow
+
+(1) DepositWithEntity - The Money Sender deposits the amount with the Global Money Transfer Vender
+(2) SentToAggregator - The Vendor sends amount to Aggregator
+(3) ReceivedByAggregator - The Aggregator confirms the receipt of the amount
+(4) SentToBank - The Aggregator sends amount to the Recipient's Bank
+(5) ReceivedByBank - The Recipient's Bank confirms the receipt of the amount
+(6) CreditedToRecipient - The amount is credited to the Recipient
+(7) ConfirmedByRecipient - The amount receipt is confirmed by the Recipient
 
 
